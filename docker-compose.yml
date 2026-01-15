@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  order-service:
+    build:
+      context: ../order-service
+      dockerfile: Dockerfile
+    ports:
+      - "8100:8100"
+    environment:
+      - PRODUCT_SERVICE_URL=http://product-service:8200
+      - LOYALTY_SERVICE_URL=http://loyalty-service:8300
+      - PORT=8100
+  
+  product-service:
+    build:
+      context: ../product-service
+      dockerfile: Dockerfile
+    ports:
+      - "8200:8200"
+    environment:
+      - PORT=8200
+  
+  loyalty-service:
+    build:
+      context: ../loyalty-service
+      dockerfile: Dockerfile
+    ports:
+      - "8300:8300"
+    environment:
+      - PORT=8300
